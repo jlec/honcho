@@ -11,7 +11,7 @@ services:
 
   caddy:
     image: caddy:2
-    container_name: honcho-solo-caddy
+    container_name: honcho-caddy
     restart: unless-stopped
     ports:
       - "127.0.0.1:8000:8000"

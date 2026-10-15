@@ -5,6 +5,6 @@
 }
 
 :8000 {
-	tls privkey.pem fullchain.pem
+	tls certs/privkey.pem certs/fullchain.pem
 	reverse_proxy honcho:8888
 }
