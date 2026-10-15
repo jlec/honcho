@@ -2,10 +2,6 @@
 name: honcho
 
 services:
-  api:
-    ports:
-      - 8000
-
   redis:
     image: redis:7.4-alpine
 
@@ -14,7 +10,7 @@ services:
     container_name: honcho-caddy
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:8008:8008"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./certs:/certs:ro
