@@ -1,0 +1,10 @@
+# TLS terminator. Certificates are supplied by you (mounted from ./certs); Caddy never requests or generates any.
+{
+	auto_https off
+	admin off
+}
+
+:8000 {
+	tls privkey.pem fullchain.pem
+	reverse_proxy honcho:8888
+}
