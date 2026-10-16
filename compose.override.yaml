@@ -1,18 +1,10 @@
 ---
 name: honcho
 
+# TLS is terminated by Tailscale (svc:honcho -> http://127.0.0.1:8000).
+# The api service binds 127.0.0.1:8000 only; no reverse proxy is needed.
 services:
   redis:
+    # redis:8.x bundles modules (RediSearch) that crash with SIGILL on
+    # Raspberry Pi 4 (Cortex-A72, no LSE atomics). Plain 7.4 is enough for the cache.
     image: redis:7.4-alpine
-
-  caddy:
-    image: caddy:2
-    container_name: honcho-caddy
-    restart: unless-stopped
-    ports:
-      - "127.0.0.1:8008:8008"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./certs:/certs:ro
-    depends_on:
-      - api
